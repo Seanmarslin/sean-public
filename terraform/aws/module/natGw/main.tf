@@ -22,7 +22,7 @@ resource "aws_eip" "aws-public-eip" {
 }
 
 // main route table
-resource "aws_route_table" "aws-private_route-table" {
+resource "aws_route_table" "aws-private-route-table" {
   count = var.aws_nat_gateways
 
     vpc_id = var.vpc_id
@@ -36,6 +36,6 @@ resource "aws_route_table_association" "private-rt-association" {
   count          = var.aws_nat_gateways
 
   subnet_id      = element(var.private_subnet_ids[*], count.index)
-  route_table_id = element(aws_route_table.aws-private_route-table[*].id, count.index)
+  route_table_id = element(aws_route_table.aws-private-route-table[*].id, count.index)
 
 }
